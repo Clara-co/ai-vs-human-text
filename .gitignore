@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+# 1 GB+, download with scripts/download_data.sh
+data/raw/

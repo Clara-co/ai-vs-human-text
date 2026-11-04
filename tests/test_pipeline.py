@@ -77,3 +77,12 @@ def test_full_run_on_synthetic_corpus(tmp_path):
     for f in ["metrics.json", "RESULTS.md", "top_features.csv", "errors.csv",
               "figures/top_features.png", "figures/confidence.png"]:
         assert (tmp_path / f).exists()
+
+
+def test_clean_is_fast_with_unmatched_quote():
+    import time
+
+    text = 'He said "' + "word " * 5000 + "and never closed it."
+    t0 = time.perf_counter()
+    clean(text)
+    assert time.perf_counter() - t0 < 1.0

@@ -10,8 +10,11 @@ from __future__ import annotations
 
 import re
 
-# A quotation of 6+ words in straight or curly double quotes
-_LONG_QUOTE = re.compile(r"[\"“](?:[^\"“”]*?\s){5,}[^\"“”]*?[\"”]")
+# Any double-quoted span (straight or curly). One negated character class keeps
+# matching linear-time; a nested-quantifier pattern backtracks catastrophically
+# on long essays that contain an unmatched quote mark.
+_QUOTED = re.compile(r"[\"“]([^\"“”]*)[\"”]")
+LONG_QUOTE_WORDS = 6
 # Lines that start with ">" (block quotes)
 _BLOCK_QUOTE = re.compile(r"^\s*>.*$", re.MULTILINE)
 # Bracketed numeric citations: [1], [2, 3], [4-6]
@@ -21,9 +24,14 @@ _AUTHOR_YEAR = re.compile(r"\((?:[A-Z][A-Za-z'\-]+(?: et al\.)?,? \d{4}[a-z]?(?:
 _SPACES = re.compile(r"[ \t]+")
 
 
+def _replace_long_quote(m: re.Match) -> str:
+    """Replace quotations of 6+ words; keep short ones like "no"."""
+    return " QUOTE " if len(m.group(1).split()) >= LONG_QUOTE_WORDS else m.group(0)
+
+
 def clean(text: str) -> str:
     text = _BLOCK_QUOTE.sub(" ", text)
-    text = _LONG_QUOTE.sub(" QUOTE ", text)
+    text = _QUOTED.sub(_replace_long_quote, text)
     text = _NUM_CITE.sub(" ", text)
     text = _AUTHOR_YEAR.sub(" ", text)
     text = _SPACES.sub(" ", text)

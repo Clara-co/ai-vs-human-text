@@ -4,7 +4,23 @@ Most AI-text detectors look for the fingerprints of machine writing. This projec
 
 This is a Python rebuild of my [text mining study](https://clara-co.github.io/projects/ai-vs-human-report.pdf), which I originally ran in LightSIDE. The rebuild uses the same dataset, sampling design, preprocessing and model family, implemented with scikit-learn so the whole experiment reruns with one command.
 
-**Results:** `outputs/RESULTS.md`, created when you run the pipeline (see [Run it](#run-it)). The run writes that page itself, so every number on it is reproducible. In the original LightSIDE study, word n-grams reached 81% accuracy (κ = 0.79) and the final feature set reached 98.1% (κ = 0.962). The rebuild measures its own numbers rather than copying these.
+## Results
+
+Balanced 1,000 train / 1,000 test sample from the full 487,235-essay corpus (full page: [`outputs/RESULTS.md`](outputs/RESULTS.md), written by the run itself):
+
+| Model | Test accuracy | Cohen's κ | 5-fold CV (train) |
+|---|---|---|---|
+| Baseline: word 1-2 grams | **98.3%** | 0.966 | 97.5% ± 0.6 |
+| Stylometric (cleaned text) | **98.0%** | 0.960 | 98.0% ± 1.0 |
+
+The stylometric model reproduces the **98.1%** of the original LightSIDE study. In this rebuild, though, plain word n-grams do just as well: the original study's 81% baseline came from a different LightSIDE setup. What the stylometric model adds is **interpretability**. Its strongest signals confirm the original findings:
+
+- **Human writing** varies its sentence length more, and explains itself with *because*, *would*, *being* and *said*.
+- **AI writing** uses more long words and more commas per sentence, and opens sentences with discourse markers like *"So,"*.
+
+![Strongest signals](outputs/figures/top_features.png)
+
+The model is confident and well separated (mean confidence 0.97 when right), and its 20 errors are less certain (0.77). [`outputs/errors.csv`](outputs/errors.csv) lists them, closest calls first.
 
 ## Data
 
@@ -63,6 +79,7 @@ tests/            unit tests + a smoke test on a synthetic corpus (checks the pl
 
 - The corpus doesn't record which AI models generated its essays, so results may not transfer to newer models.
 - Weights can be compared within a feature group, but not across groups, because the groups are on different scales (binary, TF-IDF, standardized).
+- Some essays in the corpus contain character-level noise (for example "TX" in place of "to"), which appears among the misclassified texts.
 - Polished human writing and casual AI writing are the hard cases. `errors.csv` is sorted so the closest calls come first.
 
 **Tools:** Python, scikit-learn, pandas, matplotlib, pytest. The original study was done in LightSIDE.

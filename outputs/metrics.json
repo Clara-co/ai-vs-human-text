@@ -1,0 +1,51 @@
+{
+  "dataset_rows_after_dedup": 487235,
+  "n_train": 1000,
+  "n_test": 1000,
+  "seed": 42,
+  "cv_folds": 5,
+  "models": {
+    "baseline": {
+      "accuracy": 0.983,
+      "cohen_kappa": 0.966,
+      "f1_ai": 0.9831181727904668,
+      "confusion": {
+        "human_as_human": 488,
+        "human_as_ai": 12,
+        "ai_as_human": 5,
+        "ai_as_ai": 495
+      },
+      "mean_confidence_correct": 0.9670660999768044,
+      "mean_confidence_wrong": 0.6756486162194938,
+      "cv_accuracy": [
+        0.97,
+        0.98,
+        0.97,
+        0.97,
+        0.985
+      ],
+      "n_features": 41646
+    },
+    "stylometric": {
+      "accuracy": 0.98,
+      "cohen_kappa": 0.96,
+      "f1_ai": 0.98,
+      "confusion": {
+        "human_as_human": 490,
+        "human_as_ai": 10,
+        "ai_as_human": 10,
+        "ai_as_ai": 490
+      },
+      "mean_confidence_correct": 0.9725731159910656,
+      "mean_confidence_wrong": 0.7686126349999626,
+      "cv_accuracy": [
+        0.975,
+        0.995,
+        0.965,
+        0.98,
+        0.985
+      ],
+      "n_features": 51077
+    }
+  }
+}

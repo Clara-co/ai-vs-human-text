@@ -1,0 +1,31 @@
+feature,coef,leans
+layout__share_long_words,0.6170789296089835,ai
+layout__comma_per_sentence,0.5199387446492582,ai
+"punct__EOL w w ,",0.5017111845630037,ai
+"punct__EOL w ,",0.4391417295724853,ai
+"start__^so ,",0.4375135410303454,ai
+word__important,0.4144824794558449,ai
+"punct__EOL w , w",0.4102123758855189,ai
+"punct__EOL EOL w ,",0.4068393947990366,ai
+layout__type_token_ratio,0.37526335902717095,ai
+word__learn,0.3604610832576962,ai
+punct__w EOL,0.3511964247199799,ai
+word__different,0.3286382058595014,ai
+start__^it's like,0.3263047526043515,ai
+"punct__. w w ,",0.3261225097660578,ai
+"start__^like ,",0.31954644654425834,ai
+layout__sd_sentence_words,-0.9027560000100758,human
+word__because,-0.6710312396100492,human
+word__would,-0.6543290233417313,human
+word__go,-0.5182830851584648,human
+word__you,-0.5134827309855017,human
+word__very,-0.4297638550146063,human
+word__like,-0.39927872622344235,human
+"start__^also ,",-0.37530175681448175,human
+word__said,-0.35133674244432345,human
+word__being,-0.34613631128993866,human
+layout__mean_line_words,-0.32876579535286177,human
+word__going,-0.3159701922810471,human
+word__should,-0.31528014597265785,human
+word__quote,-0.3134579157327653,human
+word__so,-0.31039858165158407,human
